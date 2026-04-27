@@ -1,0 +1,41 @@
+{
+  "run_at": "2026-04-22T21:04:00+09:00",
+  "bot_status": "no_response",
+  "last_log_ts": "2026-04-22T00:03:25+00:00",
+  "minutes_since_last_log": 724,
+  "mode": "dry_run",
+  "position": "closed",
+  "guard_state": {
+    "stopped": false,
+    "consecutive_loss": 2,
+    "daily_pnl_jpy": -10.81,
+    "trades": 2,
+    "wins": 0,
+    "losses": 2
+  },
+  "today_signals": {
+    "total": 7,
+    "entries": 0,
+    "exits": 0,
+    "errors": 0
+  },
+  "atr_analysis": {
+    "avg": 0.000169,
+    "min": 0.000137,
+    "max": 0.000194,
+    "current_threshold_weekday": 0.0002,
+    "current_threshold_weekend": 0.00008,
+    "avg_vs_threshold_ratio": 0.846,
+    "auto_fix_triggered": false,
+    "auto_fix_reason": "avg(0.000169) は閾値×0.5(0.0001)より大 → 条件A不成立 / 閾値×15(0.003)より小 → 条件B不成立"
+  },
+  "alerts": [
+    "🚨 ボット応答なし: 724分以上ログ更新なし（手動確認が必要）",
+    "⚠️ 連続損失2回（あと1回でguard停止。max_consecutive_loss=3）"
+  ],
+  "config_changes": [],
+  "discord_attempted": true,
+  "discord_sent": false,
+  "discord_error": "ProxyError: sandbox outbound HTTPS blocked (403 Forbidden)",
+  "notes": "config.yml修正条件を満たさないため自動修正なし。ATR比平均(0.000169)は閾値(0.0002)の84.6%で、0.5倍未満条件を満たさず。ボットは09:03 JST以降応答なし—手動での再起動確認を推奨。"
+}

@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-04-22T00:05:41.426836+09:00",
+  "run_count_today": 1,
+  "status": "log_stale",
+  "bot_status_message": "❌ 本日(2026-04-22)のログなし — ボット停止中",
+  "guard_state_fix": "🔧 guard_state.json のヌルバイト破損を修正しました（monitor.py が起動できない原因だった）",
+  "guard_state": {
+    "date": "2026-04-22",
+    "daily_pnl_jpy": 0.0,
+    "consecutive_loss": 0,
+    "stopped": false,
+    "stop_reason": "",
+    "trades": 0,
+    "wins": 0,
+    "losses": 0
+  },
+  "open_position": "closed（ポジションなし）",
+  "log_analysis": {
+    "today_log": "なし（2026-04-22.jsonl が存在しない）",
+    "last_activity": "2026-04-21T09:03:26+09:00",
+    "lag_hours": 15.0,
+    "apr21_signals": 7,
+    "apr21_entries": 0,
+    "apr21_errors": 0,
+    "apr21_avg_atr_ratio": 0.000229,
+    "apr20_error": "404 Client Error: bitbank OHLCV API — ボットがクラッシュ"
+  },
+  "atr_analysis": {
+    "weekday_threshold": 0.0002,
+    "weekend_threshold": 8e-05,
+    "apr21_avg_atr_ratio": 0.000229,
+    "apr21_ratio_to_threshold": 1.145,
+    "apr19_avg_atr_ratio": 0.000863,
+    "apr19_ratio_to_threshold": 10.787,
+    "weekday_low_fix": false,
+    "weekday_high_fix": false,
+    "weekend_low_fix": false,
+    "weekend_high_fix": false,
+    "auto_fix_triggered": false,
+    "note": "avg_weekday(0.000229) > threshold×0.5(0.0001) → low fix不要 | avg_weekday(0.000229) < threshold×15(0.003) → high fix不要"
+  },
+  "config_changes": null,
+  "alerts": [
+    "🚨 ボット停止中: 2026-04-22 のログが存在しない（最終活動: 2026-04-21 09:03 JST）",
+    "🔧 guard_state.json ヌルバイト破損を自動修正済み",
+    "⚠️ 2026-04-20: bitbank OHLCV API 404エラーで即クラッシュ（土日の早朝に注意）",
+    "✅ Guard停止なし（stopped=false）、連続損失なし、Guard日次損失なし",
+    "✅ 4/21 実績: 2勝0敗 ¥21.58（dry_run）"
+  ],
+  "mode": "dry_run",
+  "discord_sent": false,
+  "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden)",
+  "recommendations": [
+    "🚨 [要対応] ボットが09:03 JST（2026-04-21）以降停止中。launch_bot_shell.bat で手動再起動してください",
+    "⚠️ [要調査] bitbank の OHLCV API が 404 を返すことがある（2026-04-20確認）。日付変わり直後のAPI呼び出しに注意",
+    "✅ config.yml の ATR 閾値は適切（変更不要）— avg_weekday(0.000229) は閾値(0.0002)の1.145倍、avg_weekend(0.000863) は閾値(0.00008)の10.8倍",
+    "⚠️ Discord Webhook は監視環境のプロキシ制限で送信不可。ボット本体環境からは正常送信の見込み"
+  ]
+}

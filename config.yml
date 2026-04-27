@@ -1,0 +1,83 @@
+# ============================================================
+# config.yml  —  全設定の一元管理
+# APIキーは .env に書く。ここには書かない
+# ============================================================
+
+# --- 実行モード ---
+mode:
+  run: "dry_run"          # "dry_run" | "live"
+  # dry_run : 注文APIをスキップ。ログとDiscord通知は出す
+  # live    : 本番稼働（必ずdry_runで動作確認してから切り替える）
+
+# --- アクティブな市場 ---
+active_exchange: "bitbank"  # "bitbank" | "oanda_tokyo"（Phase 2以降）
+
+# --- ループ設定 ---
+loop:
+  interval_sec: 30          # 判断サイクル（秒）
+  max_consecutive_errors: 5 # この回数連続でエラーが出たら強制停止
+
+# --- 取引対象 ---
+targets:
+  - symbol: "btc_jpy"
+    enabled: true
+    # 将来: eth_jpy, xrp_jpy も追加予定
+
+# --- 戦略設定 ---
+strategy:
+  name: "trend_follow"
+  trend:
+    fast_period: 5          # 短期EMA期間
+    slow_period: 20         # 長期EMA期間
+  volatility:
+    atr_period: 14
+    min_atr_ratio: 0.0002        # 平日のATR閾値
+    min_atr_ratio_weekend: 0.000049  # 土日のATR閾値（ボラティリティが低いため緩める）[2026-04-25 自動最適化: 平均ATR比0.000061×0.8=0.000049]
+
+# --- 利確・損切り ---
+exit:
+  take_profit_ratio: 0.008  # エントリー価格の +0.8% で利確
+  stop_loss_ratio: 0.004    # エントリー価格の -0.4% で損切り
+
+# --- 資金管理 ---
+risk:
+  max_order_ratio: 0.02     # 1回の発注で使う残高の上限比率（2%）
+  min_order_jpy: 1000       # 最低発注額（JPY）
+
+# --- 損失制御 ---
+guard:
+  max_daily_loss_jpy: 5000  # 日次最大損失（超えたら当日停止）
+  max_consecutive_loss: 3   # 連続損失でその日の取引を停止
+  same_direction_limit: 2   # 同方向へ連続エントリーできる最大回数
+
+# --- bitbank固有設定 ---
+bitbank:
+  order_type_default: "limit"     # "limit" | "market"
+  taker_allowed_on_surge: false   # 急変時にtakerを許可するか（まずfalseで運用）
+  spread_threshold_ratio: 0.003   # スプレッドがこれより広い時はエントリーしない
+  fill_check_interval_sec: 3      # 約定確認ポーリング間隔（秒）
+  fill_timeout_sec: 90            # この時間内に約定しなければキャンセル（秒）
+
+# --- OANDA東京（Phase 2用 — 初期は無効のまま）---
+oanda_tokyo:
+  enabled: false
+
+# --- OANDA NY（将来拡張用 — 完全無効）---
+oanda_ny:
+  enabled: false
+
+# --- Discord通知 ---
+notifier:
+  discord:
+    enabled: true
+    notify_on:
+      - entry
+      - exit
+      - stop
+      - error
+      - daily_summary
+
+# --- ログ ---
+logger:
+  output_dir: "data/logs"
+  level: "INFO"

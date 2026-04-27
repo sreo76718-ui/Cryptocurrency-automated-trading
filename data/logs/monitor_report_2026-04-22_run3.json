@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-04-22T06:04:00+09:00",
+  "run_count_today": 3,
+  "status": "log_missing_bot_stopped",
+  "bot_status_message": "❌ 本日(2026-04-22)のログなし — ボット停止中またはクラッシュ",
+
+  "state_file_repair": {
+    "guard_state_json": "🔧 guard_state.json が再び書き込み途中で切断されていたため補修しました（wins=0の後で切断、losses=2を推定補完・閉じ括弧追加）",
+    "position_json": "🔧 position.json にヌルバイト(NUL)が付加されていたため除去しました（内容は正常: status=closed）",
+    "note": "ボットのファイル書き込みクラッシュが継続しています。main.pyのアトミック書き込み（tempfile + rename）強化を推奨します"
+  },
+
+  "guard_state": {
+    "date": "2026-04-22",
+    "daily_pnl": -10.808885100000001,
+    "consecutive_loss": 2,
+    "max_consec_loss": 2,
+    "same_direction_count": 2,
+    "last_side": "buy",
+    "stopped": false,
+    "stop_reason": "",
+    "trades": 2,
+    "wins": 0,
+    "losses": 2
+  },
+
+  "open_position": {
+    "status": "closed",
+    "note": "ポジションなし（run2からクローズ済み）"
+  },
+
+  "log_analysis": {
+    "today_log": "なし（2026-04-22.jsonl が存在しない）",
+    "last_activity_from_guard": "2026-04-22（trades=2、-¥10.81、連続損失2回）",
+    "apr21_signals": 7,
+    "apr21_entries": 0,
+    "apr21_exits": 0,
+    "apr21_errors": 0,
+    "apr21_avg_atr_ratio": 0.000229,
+    "apr21_min_atr_ratio": 0.000207,
+    "apr21_max_atr_ratio": 0.000267
+  },
+
+  "atr_analysis": {
+    "data_source": "2026-04-21.jsonl（本日ログ未存在のため前日データを使用）",
+    "avg_atr_ratio": 0.000229,
+    "current_threshold_weekday": 0.0002,
+    "current_threshold_weekend": 0.00008,
+    "today_is_weekend": false,
+    "active_threshold": 0.0002,
+    "ratio_to_threshold": 1.145,
+    "auto_fix_condition_low": false,
+    "auto_fix_condition_high": false,
+    "auto_fix_triggered": false,
+    "note": "avg(0.000229) > threshold×0.5(0.0001) → low fix不要 | avg(0.000229) < threshold×15(0.003) → high fix不要"
+  },
+
+  "config_changes": null,
+
+  "alerts": [
+    "🚨 ボット停止中: 2026-04-22 のログが存在しない（guard_stateはtrades=2、-¥10.81損失を記録）",
+    "🔧 guard_state.json 書き込み途中切断を再補修（Run2の補修後に再クラッシュした模様）",
+    "🔧 position.json ヌルバイト汚染を除去（内容: status=closed、ポジションなし）",
+    "⚠️ 連続損失2回（閾値2回に到達） — 自動変更なし、報告のみ",
+    "✅ ポジションはクローズ済み — 放置ポジションなし",
+    "✅ ATR閾値は適切（変更不要）— avg ATR(0.000229)は平日閾値(0.0002)の1.145倍",
+    "✅ エラー検出なし（本日ログ未存在のため前日データを参照）"
+  ],
+
+  "mode": "dry_run",
+  "discord_sent": false,
+  "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden) — 7回以上連続失敗",
+
+  "recommendations": [
+    "🚨 [要対応] ボットが停止中。launch_bot_shell.bat で手動再起動してください",
+    "⚠️ [要注意] 連続損失2回（閾値到達）。損切り比率(stop_loss_ratio=0.004)の見直しを検討してください",
+    "🔧 [重要] guard_state.jsonの書き込み途中切断がRun2補修後に再発。ボット本体のファイル書き込みをatomic write（tempfile + os.rename）に改修することを強く推奨",
+    "✅ config.yml の ATR 閾値は適切（変更不要）",
+    "⚠️ Discord Webhook は監視環境のプロキシ制限で送信不可（7回以上連続）。ボット本体の環境からは正常送信の見込み"
+  ]
+}

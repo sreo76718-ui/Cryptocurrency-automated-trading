@@ -1,0 +1,49 @@
+{
+    "timestamp": "2026-04-21T15:05:13.867533+09:00",
+    "run_count_today": 3,
+    "status": "log_stale",
+    "bot_status_message": "⚠️ 応答なし (360分更新なし)",
+    "guard_state": {
+        "date": "2026-04-21",
+        "daily_pnl_jpy": 21.58,
+        "consecutive_loss": 0,
+        "stopped": false,
+        "stop_reason": "",
+        "trades": 2,
+        "wins": 2,
+        "losses": 0
+    },
+    "open_position": "closed（ポジションなし）",
+    "log_analysis": {
+        "signals": 7,
+        "entries": 0,
+        "exits": 0,
+        "errors": 0,
+        "avg_atr_ratio": 0.000229,
+        "last_log_ts": "2026-04-21T09:03:26+09:00",
+        "lag_minutes": 360
+    },
+    "atr_analysis": {
+        "avg_atr_ratio": 0.000229,
+        "current_threshold_weekday": 0.0002,
+        "ratio_to_threshold": 1.15,
+        "auto_fix_condition_low": false,
+        "auto_fix_condition_high": false,
+        "auto_fix_triggered": false,
+        "note": "avg(0.000229) > threshold×0.5(0.0001) → low fix不要 | avg(0.000229) < threshold×15(0.003) → high fix不要"
+    },
+    "config_changes": null,
+    "alerts": [
+        "🚨 ボット応答なし: ログの最終更新から360分以上経過（09:03 JST → 15:04 JST）",
+        "⚠️ 本日エントリー0件（シグナルは7件すべてhold）",
+        "✅ Guard停止なし、連続損失なし、エラーなし"
+    ],
+    "mode": "dry_run",
+    "discord_sent": false,
+    "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden) — ユーザー環境で bot 再起動後に正常送信されます",
+    "recommendations": [
+        "🚨 ボットが09:03以降停止しています。手動で再起動してください（launch_bot_shell.bat を実行）",
+        "📋 config.yml の ATR 閾値は適切です（変更不要）",
+        "📋 stateファイルのJSONトランケーション問題（前回レポート参照）：atomic writeへの変更を引き続き推奨"
+    ]
+}

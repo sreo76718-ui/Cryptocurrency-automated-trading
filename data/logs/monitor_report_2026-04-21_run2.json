@@ -1,0 +1,49 @@
+{
+    "timestamp": "2026-04-21T06:06:03.408005+09:00",
+    "run_count_today": 2,
+    "status": "log_missing",
+    "bot_status_message": "❓ ログなし（未起動 or 日付変わり直後）",
+    "state_repair": {
+        "guard_state_repaired": true,
+        "position_repaired": true,
+        "note": "guard_state.json は \"trades\" フィールドで再びJSONトランケーション。position.json は末尾にnullバイト混入。いずれも自動修復済み。"
+    },
+    "guard_state": {
+        "date": "2026-04-21",
+        "daily_pnl_jpy": 21.58,
+        "consecutive_loss": 0,
+        "stopped": false,
+        "stop_reason": "",
+        "trades": 2,
+        "wins": 2,
+        "losses": 0
+    },
+    "open_position": "closed（ポジションなし）",
+    "atr_analysis": {
+        "source": "2026-04-19ログ（本日ログ未生成のため前日以前のデータ使用）",
+        "avg_atr_ratio": 0.000863,
+        "current_threshold_weekday": 0.0002,
+        "current_threshold_weekend": 8e-05,
+        "today_is_weekday": true,
+        "ratio_to_threshold": 4.32,
+        "auto_fix_condition_low": false,
+        "auto_fix_condition_high": false,
+        "auto_fix_triggered": false,
+        "note": "avg(0.000863) は threshold×0.5(0.0001)より大 かつ threshold×15(0.003)より小 → config.yml修正不要"
+    },
+    "alerts": [
+        "🔧 guard_state.json が再びJSONトランケーション（\"trades\"フィールド途中で切断）→ 自動修復済み",
+        "🔧 position.json が末尾にnullバイト混入でJSONパース失敗 → 自動修復済み",
+        "⚠️ 2026-04-21 のログファイルが存在しない。ボットが未起動の可能性あり。",
+        "⚠️ stateファイルのトランケーションが繰り返し発生。ボット側のファイル書き込み処理に問題がある可能性（アトミックwrite未使用など）。"
+    ],
+    "config_changes": null,
+    "mode": "dry_run",
+    "discord_sent": false,
+    "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden) — ユーザー環境では正常に送信されます",
+    "recommendations": [
+        "📋 ボットが本日(2026-04-21)起動しているか手動で確認してください。",
+        "📋 stateファイルのトランケーションが繰り返し発生しています。ボットの書き込み処理を atomic write（tempファイル→rename）に変更することを強く推奨します。",
+        "📋 config.yml の ATR 閾値は現状適切です（変更不要）。"
+    ]
+}

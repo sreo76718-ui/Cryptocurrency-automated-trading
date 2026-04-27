@@ -1,0 +1,54 @@
+{
+  "run_at": "2026-04-23T06:06:08.037290+09:00",
+  "bot_status": "no_log_today",
+  "guard_state_repaired": true,
+  "guard_state_repair_note": "JSON末尾が切り捨て（wins/losses欠落・閉じ括弧なし）→ wins=0, losses=1 で補完修復",
+  "position_json_repaired": true,
+  "position_json_repair_note": "ファイル末尾にヌルバイトが混入 → 除去してクリーンなJSONに上書き",
+  "last_known_log_ts": "2026-04-22T00:03:25+00:00",
+  "mode": "dry_run",
+  "position": "closed",
+  "guard_state": {
+    "date": "2026-04-23",
+    "stopped": false,
+    "consecutive_loss": 1,
+    "daily_pnl_jpy": -5.056931860000001,
+    "trades": 1,
+    "wins": 0,
+    "losses": 1,
+    "last_side": "buy"
+  },
+  "today_signals": {
+    "total": 0,
+    "entries": 0,
+    "exits": 0,
+    "errors": 0,
+    "log_exists": false
+  },
+  "atr_analysis": {
+    "data_source": "2026-04-22 (most recent available)",
+    "avg": 0.000169,
+    "min": 0.000137,
+    "max": 0.000194,
+    "current_threshold_weekday": 0.0002,
+    "current_threshold_weekend": 8e-05,
+    "today_is_weekend": false,
+    "active_threshold": 0.0002,
+    "avg_vs_threshold_ratio": 0.846,
+    "auto_fix_triggered": false,
+    "auto_fix_reason": "avg(0.000169)は閾値×0.5(0.0001)より大 → 条件A不成立 / 閾値×15(0.003)より小 → 条件B不成立"
+  },
+  "alerts": [
+    "🚨 ボット応答なし: 2026-04-22T09:03 JST以降ログ更新なし（40時間以上経過）。手動での再起動確認を推奨。",
+    "⚠️ 本日のJSONLログ未作成だが guard_state には1取引(buy, -¥5.06)の記録あり"
+  ],
+  "config_changes": [],
+  "discord_attempted": true,
+  "discord_sent": false,
+  "discord_error": "ProxyError: sandbox outbound HTTPS blocked (403 Forbidden) ※ユーザーPC上での実行では正常送信されます",
+  "files_repaired": [
+    "guard_state.json",
+    "position.json"
+  ],
+  "notes": "config.yml修正条件を満たさないため自動修正なし。ファイル破損2件を検出・修復。ボット未応答状態継続中。"
+}

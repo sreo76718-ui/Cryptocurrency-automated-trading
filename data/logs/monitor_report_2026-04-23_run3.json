@@ -1,0 +1,33 @@
+{
+  "report_time": "2026-04-23T21:03:00+09:00",
+  "run_by": "scheduled-task bot-monitor-3h",
+  "bot_status": "unresponsive",
+  "last_log_ts": "2026-04-23T00:01:05+00:00",
+  "silent_minutes": 722,
+  "position": "closed",
+  "today_signals": 2,
+  "today_entries": 1,
+  "today_exits": 0,
+  "today_errors": 1,
+  "error_types": ["HTTPError - bitbank 1min candlestick 404"],
+  "consecutive_loss": 2,
+  "guard_stopped": false,
+  "daily_pnl_jpy": -10.34,
+  "atr_avg": 0.000325,
+  "atr_threshold_weekday": 0.0002,
+  "atr_threshold_weekend": 0.00008,
+  "auto_fix_applied": false,
+  "auto_fix_reason": "ATR条件に該当なし（平均0.000325は閾値×0.5=0.0001より大きく、閾値×15=0.003より小さい）",
+  "alerts": [
+    "ボット無応答: 722分間ログ更新なし",
+    "連続損失2回 (閾値3回まで: guard未発動)"
+  ],
+  "suggestions": [
+    "ボットプロセスが停止している可能性があります。再起動を検討してください。",
+    "連続損失が2回: stop_loss_ratio(現在0.004)の見直しを検討してください",
+    "bitbank APIエンドポイントが404を返しています。candlestickの日付フォーマットを確認してください"
+  ],
+  "config_changes": [],
+  "discord_sent": false,
+  "discord_error": "Proxy 403 Forbidden (sandbox network restriction)"
+}

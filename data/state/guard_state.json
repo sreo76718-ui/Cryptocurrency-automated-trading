@@ -1,0 +1,13 @@
+{
+  "date": "2026-04-28",
+  "daily_pnl": 0.0,
+  "consecutive_loss": 0,
+  "max_consec_loss": 0,
+  "same_direction_count": 0,
+  "last_side": "",
+  "stopped": false,
+  "stop_reason": "",
+  "trades": 0,
+  "wins": 0,
+  "losses": 0
+}

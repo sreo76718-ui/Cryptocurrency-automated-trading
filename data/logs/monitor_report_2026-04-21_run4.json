@@ -1,0 +1,50 @@
+{
+    "timestamp": "2026-04-21T18:04:15.011615+09:00",
+    "run_count_today": 4,
+    "status": "log_stale",
+    "bot_status_message": "⚠️ 応答なし (539分更新なし)",
+    "guard_state": {
+        "date": "2026-04-21",
+        "daily_pnl_jpy": 21.58,
+        "consecutive_loss": 0,
+        "stopped": false,
+        "stop_reason": "",
+        "trades": 2,
+        "wins": 2,
+        "losses": 0
+    },
+    "open_position": "closed（ポジションなし）",
+    "log_analysis": {
+        "signals": 7,
+        "entries": 0,
+        "exits": 0,
+        "errors": 0,
+        "avg_atr_ratio": 0.000229,
+        "last_log_ts": "2026-04-21T09:03:26+09:00",
+        "lag_minutes": 539
+    },
+    "atr_analysis": {
+        "avg_atr_ratio": 0.000229,
+        "current_threshold_weekday": 0.0002,
+        "ratio_to_threshold": 1.15,
+        "auto_fix_condition_low": false,
+        "auto_fix_condition_high": false,
+        "auto_fix_triggered": false,
+        "note": "avg(0.000229) > threshold×0.5(0.0001) → low fix不要 | avg(0.000229) < threshold×15(0.003) → high fix不要"
+    },
+    "config_changes": null,
+    "alerts": [
+        "🚨 ボット応答なし: ログの最終更新から539分以上経過（09:03 JST → 18:03 JST）",
+        "⚠️ 本日エントリー0件（シグナルは7件すべてhold）",
+        "✅ Guard停止なし、連続損失なし、エラーなし",
+        "✅ 当日累計損益 ¥21.58（2勝0敗）"
+    ],
+    "mode": "dry_run",
+    "discord_sent": false,
+    "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden) — ユーザー環境で bot 再起動後に正常送信されます",
+    "recommendations": [
+        "🚨 [要対応] ボットが09:03 JST以降停止中。手動で再起動してください（launch_bot_shell.bat を実行）",
+        "📋 config.yml の ATR 閾値は適切です（変更不要）— avg ATR(0.000229) は閾値(0.0002)の1.15倍で許容範囲内",
+        "📋 前回レポートの推奨事項（atomic write対応）は引き続き有効"
+    ]
+}

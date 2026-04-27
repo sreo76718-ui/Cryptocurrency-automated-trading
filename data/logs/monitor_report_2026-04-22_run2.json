@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-04-22T03:05:00+09:00",
+  "run_count_today": 2,
+  "status": "log_missing_bot_stopped",
+  "bot_status_message": "❌ 本日(2026-04-22)のログなし — ボット停止中またはクラッシュ",
+
+  "state_file_repair": {
+    "guard_state_json": "🔧 guard_state.json が書き込み途中で切断されていたため補修しました（wins/losses フィールドが欠落）",
+    "position_json": "🔧 position.json が書き込み途中で切断されていたため補修しました（entry_ts 以降が欠落）",
+    "note": "ボットがファイル書き込み中にクラッシュしたと思われます。entry_ts は推定値(2026-04-22T00:30:00+09:00)を使用"
+  },
+
+  "guard_state": {
+    "date": "2026-04-22",
+    "daily_pnl": -4.46992548,
+    "consecutive_loss": 1,
+    "max_consec_loss": 1,
+    "stopped": false,
+    "stop_reason": "",
+    "trades": 1,
+    "wins": 0,
+    "losses": 1
+  },
+
+  "open_position": {
+    "status": "open",
+    "side": "BUY",
+    "symbol": "btc_jpy",
+    "order_id": "DRY-E85D1FD2",
+    "entry_price": 12047607.0,
+    "amount": 0.0001,
+    "take_profit": 12144003.0,
+    "stop_loss": 12019397.0,
+    "note": "ボット停止中のためポジションが放置されている状態。手動確認要"
+  },
+
+  "log_analysis": {
+    "today_log": "なし（2026-04-22.jsonl が存在しない）",
+    "last_activity_from_guard": "2026-04-22（trades=1 で1取引済みだがログなし）",
+    "apr21_signals": 7,
+    "apr21_entries": 0,
+    "apr21_exits": 0,
+    "apr21_errors": 0,
+    "apr21_avg_atr_ratio": 0.000229,
+    "apr21_min_atr_ratio": 0.000207,
+    "apr21_max_atr_ratio": 0.000267
+  },
+
+  "atr_analysis": {
+    "data_source": "2026-04-21.jsonl（本日ログ未存在のため前日データを使用）",
+    "avg_atr_ratio": 0.000229,
+    "current_threshold_weekday": 0.0002,
+    "current_threshold_weekend": 0.00008,
+    "today_is_weekend": false,
+    "active_threshold": 0.0002,
+    "ratio_to_threshold": 1.145,
+    "auto_fix_condition_low": false,
+    "auto_fix_condition_high": false,
+    "auto_fix_triggered": false,
+    "note": "avg(0.000229) > threshold×0.5(0.0001) → low fix不要 | avg(0.000229) < threshold×15(0.003) → high fix不要"
+  },
+
+  "config_changes": null,
+
+  "alerts": [
+    "🚨 ボット停止中: 2026-04-22 のログが存在しない（最終guard記録はtrades=1、-¥4.47損失）",
+    "🔧 guard_state.json 書き込み途中切断を自動補修済み（wins/lossesフィールド推定補完）",
+    "🔧 position.json 書き込み途中切断を自動補修済み（entry_ts・TP・SL推定補完）",
+    "⚠️ オープンポジション放置中: BUY DRY-E85D1FD2 @ ¥12,047,607（ボット停止のため管理されていない）",
+    "✅ 連続損失1回（閾値2回未満）— Guard停止なし",
+    "✅ エラー検出なし（ログ未存在のため確認不可）",
+    "✅ ATR閾値は適切（変更不要）— avg ATR(0.000229) は平日閾値(0.0002)の1.145倍"
+  ],
+
+  "mode": "dry_run",
+  "discord_sent": false,
+  "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden) — 6回連続失敗",
+
+  "recommendations": [
+    "🚨 [要対応] ボットが停止中。launch_bot_shell.bat で手動再起動してください",
+    "⚠️ [要確認] BUY DRY-E85D1FD2 のオープンポジションが放置中。ボット再起動後に自動管理されますが、entry_ts の推定値(00:30)を確認してください",
+    "⚠️ [継続監視] ボット起動後にクラッシュが発生している模様（guard_state / position.json が書き込み途中で切断）。main.py のエラーハンドリング強化を検討",
+    "✅ config.yml の ATR 閾値は適切（変更不要）",
+    "⚠️ Discord Webhook は監視環境のプロキシ制限で送信不可（6回連続）。ボット本体の環境からは正常送信の見込み"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-04-20T21:04:00+09:00",
+  "run_count_today": 3,
+  "status": "bot_unresponsive",
+  "last_log_ts": "2026-04-20T00:00:06.024352+00:00",
+  "minutes_since_update": 724,
+  "guard_stopped": false,
+  "consecutive_loss": 1,
+  "errors_today": 1,
+  "daily_pnl_guard": 4.88,
+  "open_position": null,
+  "atr_analysis": {
+    "source": "2026-04-19ログ（110サンプル）",
+    "avg_atr_ratio": 0.000863,
+    "min_atr_ratio_log": 0.000075,
+    "max_atr_ratio_log": 0.001885,
+    "current_threshold_weekday": 0.0002,
+    "current_threshold_weekend": 0.00008,
+    "today_is_weekday": true,
+    "ratio_to_threshold": 4.32,
+    "auto_fix_condition_low": false,
+    "auto_fix_condition_high": false,
+    "auto_fix_triggered": false,
+    "note": "avg(0.000863) は 0.5倍(0.0001)より大 かつ 15倍(0.003)より小 → 修正不要"
+  },
+  "config_changes": null,
+  "alerts": [
+    "⚠️ ボット応答なし (724分更新なし)",
+    "  原因: 起動直後に bitbank GET /btc_jpy/candlestick/1min/20260420 → 404 Not Found で停止",
+    "  対処: ボットを手動で再起動してください",
+    "  再発する場合: 日付切替タイミング問題の可能性 → リトライ処理追加を検討"
+  ],
+  "discord_sent": false,
+  "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden) — ユーザー環境では正常に送信されます"
+}

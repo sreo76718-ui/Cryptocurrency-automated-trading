@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-04-21T03:06:39+09:00",
+  "run_count_today": 1,
+  "status": "log_missing",
+  "bot_status_message": "❓ ログなし（未起動 or 日付変わり直後）",
+  "note_state_files": "guard_state.json と position.json が破損（JSON未完成）していたため、監視スクリプトが失敗。内容を分析し修復した上で再実行。",
+  "guard_state": {
+    "date": "2026-04-21",
+    "daily_pnl_jpy": 11.384566780000002,
+    "consecutive_loss": 0,
+    "stopped": false,
+    "stop_reason": "",
+    "trades": 1
+  },
+  "open_position": {
+    "status": "open",
+    "side": "buy",
+    "symbol": "btc_jpy",
+    "order_id": "DRY-3DD339AF",
+    "entry_price": 12042834.0,
+    "take_profit": 12139176.67,
+    "stop_loss": 11994662.66,
+    "entry_ts_estimated": "2026-04-21T00:00:00+09:00"
+  },
+  "atr_analysis": {
+    "source": "2026-04-19ログ（110サンプル、本日ログ未生成のため前日データ使用）",
+    "avg_atr_ratio": 0.000863,
+    "min_atr_ratio_log": 0.000075,
+    "max_atr_ratio_log": 0.001885,
+    "current_threshold_weekday": 0.0002,
+    "current_threshold_weekend": 0.00008,
+    "today_is_weekday": true,
+    "ratio_to_threshold": 4.315,
+    "auto_fix_condition_low": false,
+    "auto_fix_condition_high": false,
+    "auto_fix_triggered": false,
+    "note": "avg(0.000863) は threshold×0.5(0.0001)より大 かつ threshold×15(0.003)より小 → config.yml修正不要"
+  },
+  "alerts": [
+    "⚠️ 2026-04-21 のログファイル（data/logs/2026-04-21.jsonl）が存在しない。ボットが未起動の可能性あり。guard_stateには本日1トレードの記録があり、状態ファイルの書き込み後にログが生成されなかった可能性も考えられる。",
+    "🔧 guard_state.json と position.json が破損（JSONトランケーション）していたため、監視スクリプト起動時にエラー発生。本スクリプトが自動修復した。"
+  ],
+  "config_changes": null,
+  "mode": "dry_run",
+  "discord_sent": false,
+  "discord_error": "監視環境のプロキシが discord.com:443 をブロック (403 Forbidden) — ユーザー環境では正常に送信されます",
+  "recommendations": [
+    "📋 ボットが本日（2026-04-21）起動しているか手動で確認してください。",
+    "📋 state ファイルが書き込み途中でトランケーションされている原因を調査してください（強制終了・ディスク容量・同時書き込み競合の可能性）。",
+    "📋 config.yml の ATR 閾値は現状適切です（変更不要）。"
+  ]
+}

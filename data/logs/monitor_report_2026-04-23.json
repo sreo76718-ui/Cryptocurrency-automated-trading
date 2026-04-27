@@ -1,0 +1,48 @@
+{
+  "run_at": "2026-04-23T03:06:19.012966+09:00",
+  "bot_status": "no_log",
+  "position_json_repaired": true,
+  "position_json_repair_note": "JSONが破損（entry_ts切り捨て）のためclosedにリセット。直前のmonitor_report_2026-04-22_run6でposition=closed確認済み。",
+  "last_known_log_ts": "2026-04-22T00:03:25+00:00",
+  "hours_since_last_log": 18.0,
+  "mode": "dry_run",
+  "position": "closed",
+  "guard_state": {
+    "date": "2026-04-23",
+    "stopped": false,
+    "consecutive_loss": 0,
+    "daily_pnl_jpy": 0.0,
+    "trades": 0,
+    "wins": 0,
+    "losses": 0
+  },
+  "today_signals": {
+    "total": 0,
+    "entries": 0,
+    "exits": 0,
+    "errors": 0,
+    "log_exists": false
+  },
+  "atr_analysis": {
+    "data_source": "2026-04-22 (most recent available)",
+    "avg": 0.000169,
+    "min": 0.000137,
+    "max": 0.000194,
+    "current_threshold_weekday": 0.0002,
+    "current_threshold_weekend": 8e-05,
+    "today_is_weekend": false,
+    "active_threshold": 0.0002,
+    "avg_vs_threshold_ratio": 0.845,
+    "auto_fix_triggered": false,
+    "auto_fix_reason": "avg(0.000169)は閾値×0.5(0.0001)より大 → 条件A不成立 / 閾値×15(0.003)より小 → 条件B不成立"
+  },
+  "alerts": [
+    "🚨 ボット応答なし: 2026-04-22T09:03 JST以降ログ更新なし（約42時間+経過）。手動での再起動確認を推奨。",
+    "🔧 position.json破損を検出・修正: entry_tsが切り捨てられたJSONをclosed状態へリセット"
+  ],
+  "config_changes": [],
+  "discord_attempted": true,
+  "discord_sent": false,
+  "discord_error": "ProxyError: sandbox outbound HTTPS blocked (403 Forbidden) ※ユーザーPC上での実行では正常送信されます",
+  "notes": "config.yml修正条件を満たさないため自動修正なし。ボットは2026-04-22T09:03 JST以降応答なし—手動での再起動確認を推奨。"
+}

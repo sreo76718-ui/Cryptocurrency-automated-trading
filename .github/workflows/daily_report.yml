@@ -1,0 +1,31 @@
+name: デイリーレポート送信
+
+on:
+  schedule:
+    # 毎日 14:00 UTC = 23:00 JST に実行
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+    # GitHub画面から手動実行も可能（テスト用）
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.11 セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements.txt
+
+      - name: デイリーレポートを送信
+        run: python scripts/daily_report.py
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
