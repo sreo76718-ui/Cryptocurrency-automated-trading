@@ -16,17 +16,26 @@ class RiskManager:
         self.max_order_ratio = cfg.get("max_order_ratio", 0.02)
         self.min_order_jpy   = cfg.get("min_order_jpy", 1000)
         self.min_btc_unit    = 0.0001  # bitbankの最小発注単位
+        # 銘柄別オーバーライド（targets[].risk_overrides）
+        self._symbol_ratio = {}
+        for t in config.get("targets", []):
+            ro = t.get("risk_overrides", {})
+            if "max_order_ratio" in ro:
+                self._symbol_ratio[t["symbol"]] = ro["max_order_ratio"]
 
-    def calc_order_amount(self, balance_jpy: float, price: float) -> float:
+    def _order_ratio(self, symbol: str = "") -> float:
+        return self._symbol_ratio.get(symbol, self.max_order_ratio)
+
+    def calc_order_amount(self, balance_jpy: float, price: float,
+                          symbol: str = "") -> float:
         """
-        発注数量（BTC）を計算する。
-        発注不可の場合は 0.0 を返す。
+        発注数量を計算する。発注不可の場合は 0.0 を返す。
         """
         if price <= 0:
             return 0.0
 
-        # 使える金額の上限（残高の max_order_ratio）
-        max_jpy = balance_jpy * self.max_order_ratio
+        # 使える金額の上限（銘柄別ratio優先）
+        max_jpy = balance_jpy * self._order_ratio(symbol)
 
         if max_jpy < self.min_order_jpy:
             return 0.0  # 最低発注額に届かない

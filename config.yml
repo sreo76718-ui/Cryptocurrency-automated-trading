@@ -5,64 +5,81 @@
 
 # --- 実行モード ---
 mode:
-  run: "dry_run"          # "dry_run" | "live"
-  # dry_run : 注文APIをスキップ。ログとDiscord通知は出す
-  # live    : 本番稼働（必ずdry_runで動作確認してから切り替える）
+  run: "live"             # "dry_run" | "live"
 
 # --- アクティブな市場 ---
-active_exchange: "bitbank"  # "bitbank" | "oanda_tokyo"（Phase 2以降）
+active_exchange: "bitbank"
 
 # --- ループ設定 ---
 loop:
-  interval_sec: 30          # 判断サイクル（秒）
-  max_consecutive_errors: 5 # この回数連続でエラーが出たら強制停止
+  interval_sec: 30
+  max_consecutive_errors: 5
 
 # --- 取引対象 ---
+# ETH は最低発注額が約¥7,280のため小資金では無効
 targets:
   - symbol: "btc_jpy"
     enabled: true
-    # 将来: eth_jpy, xrp_jpy も追加予定
+    risk_overrides:
+      max_order_ratio: 0.75   # ¥20,000残高で¥15,000注文 → TP+0.8%で+¥120
 
-# --- 戦略設定 ---
+  - symbol: "eth_jpy"
+    enabled: true
+    risk_overrides:
+      max_order_ratio: 0.75   # ¥20,000残高で¥15,000注文 → TP+0.8%で+¥120
+
+  - symbol: "sol_jpy"
+    enabled: true
+    risk_overrides:
+      max_order_ratio: 0.50   # ¥20,000残高で¥10,000注文 → TP+1.2%で+¥120
+    strategy_overrides:
+      fast_period: 5
+      slow_period: 13
+      rsi_period: 14
+      rsi_buy_min: 50
+      rsi_sell_max: 50
+    exit_overrides:
+      take_profit_ratio: 0.012  # TP +1.2%
+      stop_loss_ratio: 0.006    # SL -0.6%
+
+# --- 戦略設定（デフォルト: BTC向け） ---
 strategy:
   name: "trend_follow"
   trend:
-    fast_period: 5          # 短期EMA期間
-    slow_period: 20         # 長期EMA期間
+    fast_period: 3
+    slow_period: 8
   volatility:
     atr_period: 14
-    min_atr_ratio: 0.0002        # 平日のATR閾値
-    min_atr_ratio_weekend: 0.000049  # 土日のATR閾値（ボラティリティが低いため緩める）[2026-04-25 自動最適化: 平均ATR比0.000061×0.8=0.000049]
+    min_atr_ratio: 0.0002
+    min_atr_ratio_weekend: 0.000049
 
-# --- 利確・損切り ---
+# --- 利確・損切り（デフォルト: BTC向け） ---
 exit:
-  take_profit_ratio: 0.008  # エントリー価格の +0.8% で利確
-  stop_loss_ratio: 0.004    # エントリー価格の -0.4% で損切り
+  take_profit_ratio: 0.008  # TP +0.8%
+  stop_loss_ratio: 0.004    # SL -0.4%
 
-# --- 資金管理 ---
+# --- 資金管理（小資金向け調整）---
 risk:
-  max_order_ratio: 0.02     # 1回の発注で使う残高の上限比率（2%）
-  min_order_jpy: 1000       # 最低発注額（JPY）
+  max_order_ratio: 0.10   # 残高の10%（¥20,000なら¥2,000/注文）
+  min_order_jpy: 1000     # 最低発注額
 
-# --- 損失制御 ---
+# --- 損失制御（本番設定）---
 guard:
-  max_daily_loss_jpy: 5000  # 日次最大損失（超えたら当日停止）
-  max_consecutive_loss: 3   # 連続損失でその日の取引を停止
-  same_direction_limit: 2   # 同方向へ連続エントリーできる最大回数
+  max_daily_loss_jpy: 2000    # 1日の最大損失 ¥2,000（残高の約10%）
+  max_consecutive_loss: 3     # 連続損失3回で当日停止
+  same_direction_limit: 2     # 同方向2回まで
 
 # --- bitbank固有設定 ---
 bitbank:
-  order_type_default: "limit"     # "limit" | "market"
-  taker_allowed_on_surge: false   # 急変時にtakerを許可するか（まずfalseで運用）
-  spread_threshold_ratio: 0.003   # スプレッドがこれより広い時はエントリーしない
-  fill_check_interval_sec: 3      # 約定確認ポーリング間隔（秒）
-  fill_timeout_sec: 90            # この時間内に約定しなければキャンセル（秒）
+  order_type_default: "limit"
+  taker_allowed_on_surge: false
+  spread_threshold_ratio: 0.003
+  fill_check_interval_sec: 3
+  fill_timeout_sec: 90
 
-# --- OANDA東京（Phase 2用 — 初期は無効のまま）---
+# --- OANDA（無効）---
 oanda_tokyo:
   enabled: false
-
-# --- OANDA NY（将来拡張用 — 完全無効）---
 oanda_ny:
   enabled: false
 
@@ -73,11 +90,6 @@ notifier:
     notify_on:
       - entry
       - exit
-      - stop
       - error
+      - stop
       - daily_summary
-
-# --- ログ ---
-logger:
-  output_dir: "data/logs"
-  level: "INFO"

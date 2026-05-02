@@ -63,7 +63,7 @@ class Notifier:
                 {"name": "方向",     "value": f"**{direction}**",               "inline": True},
                 {"name": "注文種別", "value": order_type,                        "inline": True},
                 {"name": "価格",     "value": f"¥{price:,.0f}",                 "inline": True},
-                {"name": "数量",     "value": f"{amount:.6f} BTC",              "inline": True},
+                {"name": "数量",     "value": f"{amount:.6f} {symbol.split('_')[0].upper()}", "inline": True},
                 {"name": "シグナル強度", "value": f"{signal.strength:.2f}",     "inline": True},
                 {"name": "理由",     "value": signal.reason,                    "inline": False},
             ],
@@ -83,7 +83,7 @@ class Notifier:
             "fields": [
                 {"name": "銘柄",   "value": symbol.upper().replace("_", "/"), "inline": True},
                 {"name": "価格",   "value": f"¥{price:,.0f}",                 "inline": True},
-                {"name": "数量",   "value": f"{amount:.6f} BTC",              "inline": True},
+                {"name": "数量",   "value": f"{amount:.6f} {symbol.split('_')[0].upper()}", "inline": True},
                 {"name": "損益",   "value": f"**{pnl_sign}¥{pnl:,.0f}**",    "inline": True},
                 {"name": "理由",   "value": reason,                           "inline": True},
             ],

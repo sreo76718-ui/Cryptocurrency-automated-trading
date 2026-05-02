@@ -1,11 +1,9 @@
 name: デイリーレポート送信
 
 on:
-  schedule:
-    # 毎日 14:00 UTC = 23:00 JST に実行
-    - cron: '0 14 * * *'
   workflow_dispatch:
-    # GitHub画面から手動実行も可能（テスト用）
+    # 手動実行のみ（スケジュール実行はCoworkタスクに移行済み）
+    # schedule は無効化: Coworkの bot-daily-report タスクが毎日23:00 JSTに実行
 
 jobs:
   send-report:
